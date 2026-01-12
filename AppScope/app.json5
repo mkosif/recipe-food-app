@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.hmosdemos.foodrecipe",
+    "bundleName": "com.hmosdemos.wearable.recipe_food_app",
     "vendor": "hmosdemos",
     "versionCode": 1000000,
     "versionName": "1.0.0",

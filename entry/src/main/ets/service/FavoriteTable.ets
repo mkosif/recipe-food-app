@@ -1,28 +1,34 @@
 import { relationalStore } from '@kit.ArkData';
+import { common } from '@kit.AbilityKit';
 import CommonConstantsDb from '../constants/CommonConstantsDb';
 import Recipe from '../model/Recipe';
 import Rdb from './Rdb';
 
 export default class FavoriteTable {
-  private table = new Rdb(
-    CommonConstantsDb.Favorite_Table.tableName,
-    CommonConstantsDb.Favorite_Table.sqlCreate,
-    CommonConstantsDb.Favorite_Table.columns
-  );
+  private table: Rdb;
 
-  constructor(callback: Function = () => {}) {
+  constructor(context: common.UIAbilityContext, callback: Function = () => {}) {
+    this.table = new Rdb(
+      context,
+      CommonConstantsDb.FAVORITE_TABLE.tableName,
+      CommonConstantsDb.FAVORITE_TABLE.sqlCreate,
+      CommonConstantsDb.FAVORITE_TABLE.columns
+    );
     this.table.getRdbStore(callback);
   }
+
   clearAll(callback: (success: boolean) => void) {
-    const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.Favorite_Table.tableName);
+    const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.FAVORITE_TABLE.tableName);
     this.table.deleteData(predicates, callback);
   }
+
   getRdbStore(callback: Function = () => {}) {
     this.table.getRdbStore(callback);
   }
+
   dropTable(callback: (success: boolean) => void) {
     this.getRdbStore(() => {
-      const sql = `DROP TABLE IF EXISTS ${CommonConstantsDb.Favorite_Table.tableName}`;
+      const sql = `DROP TABLE IF EXISTS ${CommonConstantsDb.FAVORITE_TABLE.tableName}`;
       this.table.executeSql(sql, (err?: Error) => {
         if (err) {
           console.error('Failed to drop table:', err);
@@ -35,10 +41,9 @@ export default class FavoriteTable {
     });
   }
 
-
   getCount(callback: (count: number) => void) {
     this.getRdbStore(() => {
-      const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.Favorite_Table.tableName);
+      const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.FAVORITE_TABLE.tableName);
       this.table.query(predicates, (resultSet: relationalStore.ResultSet | null) => {
         if (!resultSet) {
           callback(0);
@@ -48,8 +53,6 @@ export default class FavoriteTable {
       });
     });
   }
-
-
 
   insertFavorite(recipe: Recipe, callback: (success: boolean) => void) {
     this.getAll((recipes: Recipe[]) => {
@@ -75,17 +78,15 @@ export default class FavoriteTable {
     });
   }
 
-
-
   deleteFavorite(id: string, callback: Function) {
-    const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.Favorite_Table.tableName);
+    const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.FAVORITE_TABLE.tableName);
     predicates.equalTo('id', id);
     this.table.deleteData(predicates, callback);
   }
 
   getAll(callback: (recipes: Recipe[]) => void) {
     this.getRdbStore(() => {
-      const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.Favorite_Table.tableName);
+      const predicates = new relationalStore.RdbPredicates(CommonConstantsDb.FAVORITE_TABLE.tableName);
       this.table.query(predicates, (resultSet: relationalStore.ResultSet | null) => {
         if (!resultSet || resultSet.rowCount === 0) {
           callback([]);
@@ -109,5 +110,4 @@ export default class FavoriteTable {
       });
     });
   }
-
-}  
+}

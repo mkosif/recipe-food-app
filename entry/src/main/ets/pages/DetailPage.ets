@@ -1,50 +1,46 @@
 import Recipe from '../model/Recipe';
-import { router } from '@kit.ArkUI';
-import { RecipePageParams } from '../model/RecipeParams';
 import FavoriteTable from '../service/FavoriteTable';
+import { common } from '@kit.AbilityKit';
 
-@Entry
 @Component
-struct DetailPage {
-  private favoriteTable: FavoriteTable = new FavoriteTable();
+export struct DetailPageDestination {
+  @Prop recipe: Recipe;
+  private favoriteTable: FavoriteTable | null = null;
   @State private isLoading: boolean = true;
-  @State private recipe: Recipe = {
-    id: '',
-    name: '',
-    imageSource: '',
-    description: '',
-    isFavorite: false
-  };
-  @State private buttonText: string = ''
+  @State private currentRecipe: Recipe = this.recipe;
+  @State private buttonText: string = '';
+  private navPathStack: NavPathStack = new NavPathStack();
+  @StorageLink('context') context: common.UIAbilityContext | null = null;
 
   aboutToAppear(): void {
-    const rawParams = router.getParams();
-    if (rawParams && typeof rawParams === 'object') {
-      const params = rawParams as RecipePageParams;
-      try {
-        const parsed = JSON.parse(params.recipe) as Recipe;
-        this.recipe = parsed;
-        this.isLoading = false;
-        this.favoriteTable.getAll((recipes: Recipe[]) => {
-          const isInFavorites = recipes.some(item => item.id === this.recipe.id);
-          this.recipe.isFavorite = isInFavorites;
-          this.buttonText = isInFavorites ? 'Remove Bookmark' : 'Add Bookmark';
+    if (!this.context) {
+      console.error('Context is not available');
+      return;
+    }
 
-        });
+    this.favoriteTable = new FavoriteTable(this.context);
+    this.currentRecipe = this.recipe;
+    this.isLoading = false;
 
-      } catch (e) {
-        console.error('Recipe parse error:', e);
-        this.isLoading = false;
-      }
+    if (this.favoriteTable) {
+      this.favoriteTable.getAll((recipes: Recipe[]) => {
+        const isInFavorites = recipes.some(item => item.id === this.currentRecipe.id);
+        this.currentRecipe.isFavorite = isInFavorites;
+        this.buttonText = isInFavorites ? 'Remove Bookmark' : 'Add Bookmark';
+      });
     }
   }
 
   toggleBookmark(): void {
-    if (this.recipe.isFavorite) {
-      this.favoriteTable.deleteFavorite(this.recipe.id, (success: boolean) => {
+    if (!this.favoriteTable) {
+      return;
+    }
+
+    if (this.currentRecipe.isFavorite) {
+      this.favoriteTable.deleteFavorite(this.currentRecipe.id, (success: boolean) => {
         if (success) {
-          this.recipe.isFavorite = false;
-          this.buttonText = 'Add Bookmark'
+          this.currentRecipe.isFavorite = false;
+          this.buttonText = 'Add Bookmark';
           console.info('Bookmark removed.');
         } else {
           console.error('Failed to remove bookmark.');
@@ -52,49 +48,71 @@ struct DetailPage {
       });
     } else {
       const recipeToSave: Recipe = {
-        id: this.recipe.id,
-        name: this.recipe.name,
-        imageSource: this.recipe.imageSource,
-        description: this.recipe.description,
+        id: this.currentRecipe.id,
+        name: this.currentRecipe.name,
+        imageSource: this.currentRecipe.imageSource,
+        description: this.currentRecipe.description,
         isFavorite: true
       };
       this.favoriteTable.insertFavorite(recipeToSave, (success: boolean) => {
         if (success) {
-          this.recipe.isFavorite = true;
-          this.buttonText = 'Remove Bookmark'
-          this.favoriteTable.getCount((count: number) => {
-            console.info('Bookmark count:', count);
-          });
-
+          this.currentRecipe.isFavorite = true;
+          this.buttonText = 'Remove Bookmark';
+          if (this.favoriteTable) {
+            this.favoriteTable.getCount((count: number) => {
+              console.info('Bookmark count:', count);
+            });
+          }
           console.info('Bookmark added!');
         } else {
           console.error('Failed to add bookmark.');
         }
       });
-
     }
   }
 
   build() {
-    Scroll() {
-      Column() {
-        if (this.isLoading) {
-          this.buildShimmer();
-        } else {
-          this.buildContent();
+    NavDestination() {
+      Scroll() {
+        Column() {
+          Row() {
+            Text('←')
+              .fontSize(24)
+              .fontColor(Color.White)
+              .margin({ right: 8 })
+              .onClick(() => {
+                this.navPathStack.pop();
+              })
+            Text('Detail')
+              .fontSize(20)
+              .fontWeight(900)
+              .fontColor(Color.White)
+          }
+          .width('100%')
+          .padding(12)
+
+          if (this.isLoading) {
+            this.buildShimmer();
+          } else {
+            this.buildContent();
+          }
         }
       }
+      .scrollable(ScrollDirection.Vertical)
+      .backgroundColor(Color.Black)
+      .width('100%')
+      .height('100%')
     }
-    .scrollable(ScrollDirection.Vertical)
-    .backgroundColor(Color.Black)
-    .width('100%')
-    .height('100%')
+    .hideTitleBar(true)
+    .onReady((context: NavDestinationContext) => {
+      this.navPathStack = context.pathStack;
+    })
   }
 
   @Builder
   private buildContent() {
     Column() {
-      Image($rawfile(this.recipe.imageSource))
+      Image($rawfile(this.currentRecipe.imageSource))
         .width('90%')
         .height(150)
         .objectFit(ImageFit.Cover)
@@ -102,7 +120,7 @@ struct DetailPage {
         .margin({ top: 10, bottom: 10 })
         .alignSelf(ItemAlign.Center)
 
-      Text(this.recipe.name)
+      Text(this.currentRecipe.name)
         .fontSize(20)
         .fontWeight(FontWeight.Bold)
         .fontColor(Color.White)
@@ -115,7 +133,7 @@ struct DetailPage {
         .fontColor('#BBBBBB')
         .margin({ left: 12, right: 12, bottom: 4 })
 
-      Text(this.recipe.description)
+      Text(this.currentRecipe.description)
         .fontSize(14)
         .fontColor(Color.White)
         .margin({ left: 12, right: 12, bottom: 20 })
@@ -123,10 +141,10 @@ struct DetailPage {
 
       Button(this.buttonText)
         .backgroundColor(Color.White)
-        .fontColor(Color.White)
+        .fontColor(Color.Black)
         .margin({ bottom: 10 })
         .fontSize(13)
-        .onClick(() => this.toggleBookmark());
+        .onClick(() => this.toggleBookmark())
     }
   }
 
@@ -149,12 +167,5 @@ struct DetailPage {
         .margin(10)
     }
     .alignItems(HorizontalAlign.Center)
-  }
-
-  pageTransition() {
-    PageTransitionEnter({ type: RouteType.Push, duration: 400 }).slide(SlideEffect.Right)
-    PageTransitionEnter({ type: RouteType.Pop, duration: 400 }).slide(SlideEffect.Left)
-    PageTransitionExit({ type: RouteType.Push, duration: 400 }).slide(SlideEffect.Left)
-    PageTransitionExit({ type: RouteType.Pop, duration: 400 }).slide(SlideEffect.Right)
   }
 }

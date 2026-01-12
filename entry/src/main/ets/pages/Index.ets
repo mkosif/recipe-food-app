@@ -1,72 +1,84 @@
-import { router } from '@kit.ArkUI'
+import Recipe from '../model/Recipe';
+import { DetailPageDestination } from './DetailPage';
+import { FavoritePageDestination } from './favorites/FavoritePage';
+import { RecipesPageDestination } from './recipes/RecipesPage';
 
 @Entry
 @Component
 struct Index {
-
+  private navPathStack: NavPathStack = new NavPathStack();
 
   build() {
-    Row() {
-      Column() {
-        Button() {
-          Row() {
-            Image($r('app.media.recipe'))
-              .width(24)
-              .height(24)
-              .margin({ right: 8 })
+    Navigation(this.navPathStack) {
+      Row() {
+        Column() {
+          Button() {
+            Row() {
+              Image($r('app.media.recipe'))
+                .width(24)
+                .height(24)
+                .margin({ right: 8 })
 
-            Text('Recipes')
-              .fontColor('#ff000000')
-              .fontWeight(900)
-              .fontSize(25)
-              .fontStyle(FontStyle.Italic)
+              Text('Recipes')
+                .fontColor('#ff000000')
+                .fontWeight(900)
+                .fontSize(25)
+                .fontStyle(FontStyle.Italic)
+            }
           }
-        }
-        .type(ButtonType.Normal)
-        .borderRadius(5)
-        .padding(10)
-        .backgroundColor('#ffffffff')
-        .onClick(() => {
-          router.pushUrl({ url: 'pages/recipes/RecipesPage' })
-        })
+          .type(ButtonType.Normal)
+          .borderRadius(5)
+          .padding(10)
+          .backgroundColor('#ffffffff')
+          .onClick(() => {
+            this.navPathStack.pushPath({ name: 'RecipesPage' });
+          })
 
-        Blank().height('5%')
+          Blank().height('5%')
 
-        Button() {
-          Row() {
-            Image($r('app.media.bookmarks'))
-              .width(24)
-              .height(24)
-              .margin({ right: 8 })
+          Button() {
+            Row() {
+              Image($r('app.media.bookmarks'))
+                .width(24)
+                .height(24)
+                .margin({ right: 8 })
 
-            Text('Bookmarks')
-              .fontColor('#ff000000')
-              .fontWeight(900)
-              .fontSize(25)
-              .fontStyle(FontStyle.Italic)
+              Text('Bookmarks')
+                .fontColor('#ff000000')
+                .fontWeight(900)
+                .fontSize(25)
+                .fontStyle(FontStyle.Italic)
+            }
           }
+          .type(ButtonType.Normal)
+          .borderRadius(5)
+          .padding(10)
+          .backgroundColor('#ffffffff')
+          .onClick(() => {
+            this.navPathStack.pushPath({ name: 'FavoritePage' });
+          })
         }
-
-        .type(ButtonType.Normal)
-        .borderRadius(5)
-        .padding(10)
-        .backgroundColor('#ffffffff')
-        .onClick(() => {
-          router.pushUrl({ url: 'pages/favorites/FavoritePage' })
-        })
+        .alignItems(HorizontalAlign.Center)
+        .width('100%')
       }
-      .alignItems(HorizontalAlign.Center)
+      .backgroundColor(Color.Black)
+      .height('100%')
       .width('100%')
     }
-    .backgroundColor(Color.Black)
-    .height('100%')
-    .width('100%')
+    .navDestination(this.buildNavDestination)
+    .mode(NavigationMode.Stack)
+    .hideToolBar(true)
+    .hideTitleBar(true)
   }
 
-  pageTransition() {
-    PageTransitionEnter({ type: RouteType.Push, duration: 600 }).slide(SlideEffect.Right)
-    PageTransitionEnter({ type: RouteType.Pop, duration: 600 }).slide(SlideEffect.Left)
-    PageTransitionExit({ type: RouteType.Push, duration: 600 }).slide(SlideEffect.Left)
-    PageTransitionExit({ type: RouteType.Pop, duration: 600 }).slide(SlideEffect.Right)
+  @Builder
+  buildNavDestination(name: string, param: Object) {
+    if (name === 'RecipesPage') {
+      RecipesPageDestination();
+    } else if (name === 'FavoritePage') {
+      FavoritePageDestination();
+    } else if (name === 'DetailPage') {
+      DetailPageDestination({ recipe: param as Recipe });
+    }
   }
 }

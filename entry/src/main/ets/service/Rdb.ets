@@ -1,18 +1,22 @@
 import { relationalStore } from '@kit.ArkData';
 import CommonConstants from '../constants/CommonConstantsDb';
 import Logger from '../util/Logger';
+import { common } from '@kit.AbilityKit';
 
 export default class Rdb {
   private rdbStore: relationalStore.RdbStore | null = null;
   private tableName: string;
   private sqlCreateTable: string;
   private columns: Array<string>;
+  private context: common.UIAbilityContext;
 
-  constructor(tableName: string, sqlCreateTable: string, columns: Array<string>) {
+  constructor(context: common.UIAbilityContext, tableName: string, sqlCreateTable: string, columns: Array<string>) {
+    this.context = context;
     this.tableName = tableName;
     this.sqlCreateTable = sqlCreateTable;
     this.columns = columns;
   }
+
   executeSql(sql: string, callback?: (err?: Error) => void): void {
     if (!this.rdbStore) {
       console.error('RDB store not initialized.');
@@ -31,8 +35,7 @@ export default class Rdb {
     });
   }
 
-  getRdbStore(callback: Function = () => {
-  }) {
+  getRdbStore(callback: Function = () => {}) {
     if (!callback || typeof callback === 'undefined' || callback === undefined) {
       Logger.info(CommonConstants.RDB_TAG, 'getRdbStore() has no callback!');
       return;
@@ -40,10 +43,10 @@ export default class Rdb {
     if (this.rdbStore !== null) {
       Logger.info(CommonConstants.RDB_TAG, 'The rdbStore exists.');
       callback();
-      return
+      return;
     }
-    let context = getContext(this) as Context;
-    relationalStore.getRdbStore(context, CommonConstants.STORE_CONFIG, (err, rdb) => {
+
+    relationalStore.getRdbStore(this.context, CommonConstants.STORE_CONFIG, (err, rdb) => {
       if (err) {
         Logger.error(CommonConstants.RDB_TAG, `gerRdbStore() failed, err: ${err.code}`);
         return;
@@ -67,14 +70,12 @@ export default class Rdb {
     });
   }
 
-
-  deleteData(predicates: relationalStore.RdbPredicates, callback: Function = () => {
-  }) {
+  deleteData(predicates: relationalStore.RdbPredicates, callback: Function = () => {}) {
     if (!callback || typeof callback === 'undefined' || callback === undefined) {
       Logger.info(CommonConstants.RDB_TAG, 'deleteData() has no callback!');
       return;
     }
-    let resFlag: boolean = false;
+    const resFlag: boolean = false;
     if (this.rdbStore) {
       this.rdbStore.delete(predicates, (err, ret) => {
         if (err) {
@@ -87,30 +88,28 @@ export default class Rdb {
       });
     }
   }
-
-  updateData(predicates: relationalStore.RdbPredicates, data: relationalStore.ValuesBucket, callback: Function = () => {
-  }) {
-    if (!callback || typeof callback === 'undefined' || callback === undefined) {
+  
+  updateData(predicate: relationalStore.RdbPredicates, data: relationalStore.ValuesBucket, call: Function = () => {}) {
+    if (!call || typeof call === 'undefined' || call === undefined) {
       Logger.info(CommonConstants.RDB_TAG, 'updateDate() has no callback!');
       return;
     }
-    let resFlag: boolean = false;
+    const resFlag: boolean = false;
     const valueBucket: relationalStore.ValuesBucket = data;
     if (this.rdbStore) {
-      this.rdbStore.update(valueBucket, predicates, (err, ret) => {
+      this.rdbStore.update(valueBucket, predicate, (err, ret) => {
         if (err) {
           Logger.error(CommonConstants.RDB_TAG, `updateData() failed, err: ${err}`);
-          callback(resFlag);
+          call(resFlag);
           return;
         }
         Logger.info(CommonConstants.RDB_TAG, `updateData() finished: ${ret}`);
-        callback(!resFlag);
+        call(!resFlag);
       });
     }
   }
 
-  query(predicates: relationalStore.RdbPredicates, callback: Function = () => {
-  }) {
+  query(predicates: relationalStore.RdbPredicates, callback: Function = () => {}) {
     if (!callback || typeof callback === 'undefined' || callback === undefined) {
       Logger.info(CommonConstants.RDB_TAG, 'query() has no callback!');
       return;

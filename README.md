@@ -5,10 +5,10 @@ This app is a lightweight and intuitive recipe manager designed for HarmonyOS we
 
 # Preview
 <div>
-  <img src="screenshots/1.png" width="24%" />
-  <img src="screenshots/2.png" width="24%" />
-  <img src="screenshots/3.png" width="24%" />
-  <img src="screenshots/3.png" width="24%" />
+<img src="screenshots/1.png" width="24%" />
+<img src="screenshots/2.png" width="24%" />
+<img src="screenshots/3.png" width="24%" />
+<img src="screenshots/4.png" width="24%" />
 </div>
 
 # Use Cases

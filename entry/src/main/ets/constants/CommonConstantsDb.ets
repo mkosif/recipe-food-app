@@ -12,7 +12,7 @@ export default class CommonConstantsDb {
     securityLevel: relationalStore.SecurityLevel.S1
   };
 
-  static readonly Favorite_Table: TableDefinition = {
+  static readonly FAVORITE_TABLE: TableDefinition = {
     tableName: 'favoriteTable',
     sqlCreate: `CREATE TABLE IF NOT EXISTS favoriteTable (
       id TEXT PRIMARY KEY,
@@ -21,7 +21,7 @@ export default class CommonConstantsDb {
       description TEXT,
       isFavorite INTEGER
     )`,
-    columns: ['id', 'name', 'imageSource', 'description','isFavorite']
+    columns: ['id', 'name', 'imageSource', 'description', 'isFavorite']
   };
 
 

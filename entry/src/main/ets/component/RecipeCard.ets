@@ -1,10 +1,10 @@
 import Recipe from '../model/Recipe';
-import { router } from '@kit.ArkUI';
 
 @Component
 export default struct RecipeCard {
   @Prop recipe: Recipe;
   @State favOpacity: number = 0;
+  @Consume('navPathStack') navPathStack: NavPathStack;
 
   build() {
     Column() {
@@ -17,7 +17,6 @@ export default struct RecipeCard {
         .gesture(
           TapGesture({ count: 2 }).onAction(() => {
             this.favOpacity = 1
-
           })
         )
 
@@ -31,10 +30,7 @@ export default struct RecipeCard {
     .width('100%')
     .height(100)
     .onClick(() => {
-      router.pushUrl({
-        url: 'pages/DetailPage',
-        params: { recipe: JSON.stringify(this.recipe) }
-      });
+      this.navPathStack.pushPathByName('DetailPage', this.recipe);
     });
   }
 }
