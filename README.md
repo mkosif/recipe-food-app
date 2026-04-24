@@ -24,16 +24,13 @@ This app is a lightweight and intuitive recipe manager designed for HarmonyOS we
 # Technology
 ## Stack
 - **Languages**: ArkTS/ArkUI
-- **Frameworks**: HarmonyOS SDK 5.1.0.54
-- **Tools**: DevEco Studio Vers 5.1.0.260
+- **Frameworks**: HarmonyOS SDK 6.0.0(20)
+- **Tools**: DevEco Studio 5.1.0.260+
 - **Libraries**:
-  - `@kit.ArkUI`
-  - `@ohos.data.rdb`  – Local relational database support (for storing favorites)
-  - `@ohos.router`
-  - `@ohos.app.ability`
-
-## Required Permissions
-- **ohos.permission.INTERNET**: Allows the app to fetch picture data from an endpoint.
+  - `@kit.ArkUI` – UI components and Navigation
+  - `@kit.ArkData` (`relationalStore`) – Local relational database for bookmarks
+  - `@kit.AbilityKit` – UIAbility and lifecycle
+  - `@kit.PerformanceAnalysisKit` (`hilog`) – Structured logging
 
 # Directory Structure
 ```
@@ -42,29 +39,28 @@ entry/
     ├── component/
     │   └── RecipeCard.ets             # UI component for displaying individual recipes
     ├── constants/
-    │   └── CommonConstantsDb.ets      # Constant values, especially for RDB usage
+    │   └── CommonConstantsDb.ets      # RDB constants and table schema
     ├── entryability/
     │   └── EntryAbility.ets           # Main app launcher
     ├── entrybackupability/
     │   └── EntryBackupAbility.ets     # Backup launch logic
     ├── model/
-    │   ├── Recipe.ets
-    │   └── RecipeParams.ets           # Params for navigating recipe pages
+    │   └── Recipe.ets                 # Recipe model interface
     ├── pages/
+    │   ├── Index.ets                  # Main navigation (Recipes & Bookmarks)
+    │   ├── DetailPage.ets             # Recipe detail with bookmark toggle
     │   ├── favorites/
     │   │   └── FavoritePage.ets       # Bookmarked recipes list
     │   └── recipes/
-    │       ├── RecipesPage.ets        # Recipe list with swiper interface
-    │       ├── DetailPage.ets         # Recipe detail view with add-to-bookmark
-    │       └── Index.ets              # Main navigation page (Bookmarks & Recipes)
+    │       └── RecipesPage.ets        # Recipe swiper page
     ├── service/
-    │   ├── FavoriteTable.ets          # RDB schema and operations for bookmarks
-    │   └── Rdb.ets                     # Local database access and logic
+    │   ├── FavoriteTable.ets          # RDB operations for bookmarks
+    │   └── Rdb.ets                    # Generic RDB wrapper
     ├── util/
-    │   └── Logger.ets                 # Logging utility
+    │   └── Logger.ets                 # hilog-based logging utility
     └── viewmodel/
-        ├── RecipesDetailViewModel.ets
-        └── RecipesViewModel.ets       # ViewModels for state and UI logic
+        ├── RecipesDetailViewModel.ets # Bookmark ViewModel
+        └── RecipesViewModel.ets       # Recipe catalog (seed data)
 
 ```
 

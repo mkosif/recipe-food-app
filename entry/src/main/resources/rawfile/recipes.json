@@ -1,0 +1,280 @@
+{
+  "recipes": [
+    {
+      "id": "1",
+      "name": "Mercimek Çorbası",
+      "imageSource": "img2.jpg",
+      "description": "Türk mutfağının klasiği; kırmızı mercimek, havuç, patates ve soğanla hazırlanır. Üzerine tereyağında kavrulmuş nane ve pul biber gezdirilir.",
+      "category": "soup",
+      "durationMin": 40,
+      "difficulty": "easy",
+      "servings": 4,
+      "ingredients": [
+        { "name": "Kırmızı mercimek", "amount": 1, "unit": "su bardağı" },
+        { "name": "Soğan", "amount": 1, "unit": "adet" },
+        { "name": "Havuç", "amount": 1, "unit": "adet" },
+        { "name": "Patates", "amount": 1, "unit": "adet" },
+        { "name": "Tereyağı", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Un", "amount": 1, "unit": "yemek kaşığı" },
+        { "name": "Su", "amount": 7, "unit": "su bardağı" },
+        { "name": "Tuz", "amount": 1, "unit": "çay kaşığı" },
+        { "name": "Nane", "amount": 1, "unit": "çay kaşığı" },
+        { "name": "Pul biber", "amount": 1, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Mercimekleri yıkayıp süzün.",
+        "Soğanı, havucu ve patatesi küp küp doğrayın.",
+        "Tencerede tereyağını eritip soğanı pembeleşene kadar kavurun.",
+        "Unu ekleyip 1 dakika kavurun.",
+        "Mercimek, havuç, patates ve suyu ekleyin; kaynayınca kısık ateşte 30 dk pişirin.",
+        "Blender ile pürüzsüzleşene kadar çekin, tuzunu ayarlayın.",
+        "Servis tabağında üzerine kızdırılmış tereyağı-nane-pul biber gezdirin."
+      ],
+      "nutrition": { "calories": 180, "proteinG": 9, "carbsG": 28, "fatG": 4 }
+    },
+    {
+      "id": "2",
+      "name": "Tereyağlı Pirinç Pilavı",
+      "imageSource": "img3.jpg",
+      "description": "Tanesi tanesinden ayrı, tereyağı aromalı klasik baldo pilavı. Şehriye ile zenginleştirilmiş bu tarif ana yemeklerin yanına da kendi başına da yakışır.",
+      "category": "main",
+      "durationMin": 30,
+      "difficulty": "easy",
+      "servings": 4,
+      "ingredients": [
+        { "name": "Baldo pirinç", "amount": 2, "unit": "su bardağı" },
+        { "name": "Tereyağı", "amount": 3, "unit": "yemek kaşığı" },
+        { "name": "Tel şehriye", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Sıcak su veya et suyu", "amount": 3, "unit": "su bardağı" },
+        { "name": "Tuz", "amount": 1, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Pirinci sıcak tuzlu suda 15 dk bekletin, süzüp durulayın.",
+        "Tencerede tereyağını eritip şehriyeyi kızartın.",
+        "Süzülmüş pirinci ekleyip 2-3 dk kavurun.",
+        "Sıcak su ve tuzu ekleyin; kaynayınca kısık ateşe alıp kapağı kapatın.",
+        "Suyunu çekene kadar (yaklaşık 15 dk) pişirin.",
+        "Ocaktan alıp üzerine peçete örtün, 10 dk dinlendirin ve harmanlayın."
+      ],
+      "nutrition": { "calories": 320, "proteinG": 6, "carbsG": 55, "fatG": 9 }
+    },
+    {
+      "id": "3",
+      "name": "Domates Soslu Makarna",
+      "imageSource": "img1.jpg",
+      "description": "İtalyan usulü domates soslu makarna. Zeytinyağında sarımsak kavurması, rendelenmiş domates, fesleğen ve parmesan ile hızlı ve doyurucu bir öğün.",
+      "category": "main",
+      "durationMin": 25,
+      "difficulty": "easy",
+      "servings": 3,
+      "ingredients": [
+        { "name": "Makarna", "amount": 300, "unit": "g" },
+        { "name": "Olgun domates", "amount": 4, "unit": "adet" },
+        { "name": "Sarımsak", "amount": 2, "unit": "diş" },
+        { "name": "Zeytinyağı", "amount": 3, "unit": "yemek kaşığı" },
+        { "name": "Fesleğen", "amount": 5, "unit": "yaprak" },
+        { "name": "Parmesan", "amount": 3, "unit": "yemek kaşığı" },
+        { "name": "Tuz", "amount": 1, "unit": "çay kaşığı" },
+        { "name": "Karabiber", "amount": 0.5, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Bol tuzlu suda makarnayı al dente pişirin; haşlama suyundan 1 kepçe ayırın.",
+        "Tavada zeytinyağında dilimlenmiş sarımsağı aromalanana kadar kavurun.",
+        "Rendelenmiş domatesi ekleyip suyunu çekene kadar 8-10 dk pişirin.",
+        "Tuz ve karabiberi ekleyin.",
+        "Süzülmüş makarnayı sosa alın, 1 kepçe haşlama suyu ekleyip harmanlayın.",
+        "Servis ederken fesleğen ve parmesan ile süsleyin."
+      ],
+      "nutrition": { "calories": 420, "proteinG": 13, "carbsG": 68, "fatG": 11 }
+    },
+    {
+      "id": "4",
+      "name": "Supangle",
+      "imageSource": "img4.jpeg",
+      "description": "Koyu çikolatalı, üzeri kremsi kakao tabakası ile kaplı yoğun bir sütlü tatlı. Altında kek tabakası ile klasik pastane lezzeti.",
+      "category": "dessert",
+      "durationMin": 45,
+      "difficulty": "medium",
+      "servings": 6,
+      "ingredients": [
+        { "name": "Süt", "amount": 4, "unit": "su bardağı" },
+        { "name": "Toz şeker", "amount": 1, "unit": "su bardağı" },
+        { "name": "Nişasta", "amount": 3, "unit": "yemek kaşığı" },
+        { "name": "Kakao", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Bitter çikolata", "amount": 80, "unit": "g" },
+        { "name": "Tereyağı", "amount": 1, "unit": "yemek kaşığı" },
+        { "name": "Hazır kek", "amount": 6, "unit": "dilim" }
+      ],
+      "steps": [
+        "Sütün yarısını tencereye alın, şeker, nişasta ve kakaoyu ekleyip ezilene kadar karıştırın.",
+        "Kalan sütü ekleyip orta ateşte sürekli karıştırarak koyulaştırın.",
+        "Ocaktan almadan çikolata ve tereyağını ekleyip eritin.",
+        "Kase dibine kek dilimi yerleştirin, üzerine muhallebiyi dökün.",
+        "Oda sıcaklığında ılıtıp buzdolabında en az 3 saat dinlendirin.",
+        "Servis öncesi üzerine rendelenmiş çikolata serpin."
+      ],
+      "nutrition": { "calories": 310, "proteinG": 7, "carbsG": 48, "fatG": 11 }
+    },
+    {
+      "id": "5",
+      "name": "Menemen",
+      "imageSource": "img1.jpg",
+      "description": "Klasik Türk kahvaltısının baş tacı; yeşil biber, domates ve yumurtayla yapılan kolay ve doyurucu bir kahvaltılık.",
+      "category": "breakfast",
+      "durationMin": 15,
+      "difficulty": "easy",
+      "servings": 2,
+      "ingredients": [
+        { "name": "Yumurta", "amount": 4, "unit": "adet" },
+        { "name": "Sivri biber", "amount": 3, "unit": "adet" },
+        { "name": "Domates", "amount": 3, "unit": "adet" },
+        { "name": "Zeytinyağı", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Tuz", "amount": 0.5, "unit": "çay kaşığı" },
+        { "name": "Pul biber", "amount": 1, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Biberleri ince halka, domatesleri küp küp doğrayın.",
+        "Tavada zeytinyağını ısıtıp biberleri 3 dk soteleyin.",
+        "Domatesi ekleyip suyunu salana kadar 5 dk pişirin.",
+        "Tuz ve pul biberi ilave edin.",
+        "Yumurtaları kırın, sarısı akışkan kalacak şekilde 2 dk pişirin.",
+        "Sıcak ekmekle servis edin."
+      ],
+      "nutrition": { "calories": 280, "proteinG": 16, "carbsG": 10, "fatG": 20 }
+    },
+    {
+      "id": "6",
+      "name": "Çoban Salatası",
+      "imageSource": "img2.jpg",
+      "description": "Domates, salatalık, soğan ve yeşil biberle hazırlanan ferahlatıcı klasik Türk salatası. Zeytinyağı ve limonla taçlanır.",
+      "category": "salad",
+      "durationMin": 10,
+      "difficulty": "easy",
+      "servings": 3,
+      "ingredients": [
+        { "name": "Domates", "amount": 3, "unit": "adet" },
+        { "name": "Salatalık", "amount": 2, "unit": "adet" },
+        { "name": "Kuru soğan", "amount": 0.5, "unit": "adet" },
+        { "name": "Sivri biber", "amount": 1, "unit": "adet" },
+        { "name": "Maydanoz", "amount": 0.25, "unit": "demet" },
+        { "name": "Zeytinyağı", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Limon suyu", "amount": 1, "unit": "yemek kaşığı" },
+        { "name": "Tuz", "amount": 0.5, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Domatesleri, salatalıkları, soğanı ve biberi küp küp doğrayın.",
+        "Maydanozu ince kıyın.",
+        "Hepsini kaba alın, zeytinyağı, limon ve tuzu ekleyin.",
+        "İyice harmanlayıp hemen servis edin."
+      ],
+      "nutrition": { "calories": 120, "proteinG": 2, "carbsG": 10, "fatG": 8 }
+    },
+    {
+      "id": "7",
+      "name": "Sütlaç",
+      "imageSource": "img4.jpeg",
+      "description": "Fırında üzeri çıtır kabuk tutmuş klasik Türk sütlü tatlısı. Pirinç, süt ve şekerle yapılır; tarçın ile servis edilir.",
+      "category": "dessert",
+      "durationMin": 60,
+      "difficulty": "medium",
+      "servings": 6,
+      "ingredients": [
+        { "name": "Pirinç", "amount": 0.5, "unit": "su bardağı" },
+        { "name": "Su", "amount": 2, "unit": "su bardağı" },
+        { "name": "Süt", "amount": 6, "unit": "su bardağı" },
+        { "name": "Toz şeker", "amount": 1, "unit": "su bardağı" },
+        { "name": "Nişasta", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Tarçın", "amount": 1, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Pirinci suyla tencereye alıp suyunu çekene kadar pişirin.",
+        "Sütü ekleyip 20 dk orta ateşte pişirin.",
+        "Şekeri ilave edip 5 dk daha kaynatın.",
+        "Nişastayı az sütle ezip tencereye ekleyin; koyulaşana kadar karıştırın.",
+        "Güveç kaplarına paylaştırın, önceden ısıtılmış 220°C fırında üzeri kızarana kadar pişirin.",
+        "Soğuttuktan sonra üzerine tarçın serpip servis edin."
+      ],
+      "nutrition": { "calories": 260, "proteinG": 6, "carbsG": 50, "fatG": 4 }
+    },
+    {
+      "id": "8",
+      "name": "Gözleme",
+      "imageSource": "img3.jpg",
+      "description": "Açılmış yufkanın arasına peynir ve maydanoz konularak sacda pişirilen geleneksel Türk hamur işi. Kahvaltıya veya ara öğüne birebir.",
+      "category": "pastry",
+      "durationMin": 50,
+      "difficulty": "medium",
+      "servings": 4,
+      "ingredients": [
+        { "name": "Un", "amount": 3, "unit": "su bardağı" },
+        { "name": "Ilık su", "amount": 1, "unit": "su bardağı" },
+        { "name": "Tuz", "amount": 1, "unit": "çay kaşığı" },
+        { "name": "Beyaz peynir", "amount": 200, "unit": "g" },
+        { "name": "Maydanoz", "amount": 0.5, "unit": "demet" },
+        { "name": "Tereyağı", "amount": 2, "unit": "yemek kaşığı" }
+      ],
+      "steps": [
+        "Un, su ve tuzu yoğurup yumuşak bir hamur elde edin; 20 dk dinlendirin.",
+        "Peyniri çatalla ezip ince kıyılmış maydanozla karıştırın.",
+        "Hamuru 8 beze alın, oklavayla ince açın.",
+        "Açılan yufkanın yarısına harç koyup yarım ay şeklinde kapatın.",
+        "Kızdırılmış sac veya tavada her iki yüzünü kızartın.",
+        "Üzerine eritilmiş tereyağı sürüp sıcak servis edin."
+      ],
+      "nutrition": { "calories": 380, "proteinG": 14, "carbsG": 52, "fatG": 12 }
+    },
+    {
+      "id": "9",
+      "name": "Türk Kahvesi",
+      "imageSource": "img4.jpeg",
+      "description": "UNESCO kültür mirası Türk kahvesi; köpüklü, yoğun aromalı. Cezvede pişirilir ve lokumla ikram edilir.",
+      "category": "drink",
+      "durationMin": 5,
+      "difficulty": "easy",
+      "servings": 1,
+      "ingredients": [
+        { "name": "Türk kahvesi", "amount": 1, "unit": "yemek kaşığı" },
+        { "name": "Soğuk su", "amount": 1, "unit": "kahve fincanı" },
+        { "name": "Şeker (isteğe bağlı)", "amount": 1, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Soğuk suyu cezveye alın.",
+        "Kahve ve şekeri ekleyip karıştırın.",
+        "Kısık ateşte köpüğü yavaş yavaş kabartın.",
+        "Köpük kabarınca fincana önce köpüğü dökün.",
+        "Kalan kahveyi cezvede bir kaynatma daha verip fincana ilave edin."
+      ],
+      "nutrition": { "calories": 20, "proteinG": 0, "carbsG": 4, "fatG": 0 }
+    },
+    {
+      "id": "10",
+      "name": "Kısır",
+      "imageSource": "img2.jpg",
+      "description": "İnce bulgur, biber-domates salçası, limon ve nar ekşisiyle yapılan klasik bir meze/salata. Marul yapraklarıyla dürüm gibi yenir.",
+      "category": "salad",
+      "durationMin": 35,
+      "difficulty": "easy",
+      "servings": 5,
+      "ingredients": [
+        { "name": "İnce bulgur", "amount": 2, "unit": "su bardağı" },
+        { "name": "Sıcak su", "amount": 2, "unit": "su bardağı" },
+        { "name": "Domates salçası", "amount": 1, "unit": "yemek kaşığı" },
+        { "name": "Biber salçası", "amount": 1, "unit": "yemek kaşığı" },
+        { "name": "Zeytinyağı", "amount": 4, "unit": "yemek kaşığı" },
+        { "name": "Limon suyu", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Nar ekşisi", "amount": 2, "unit": "yemek kaşığı" },
+        { "name": "Maydanoz", "amount": 0.5, "unit": "demet" },
+        { "name": "Taze soğan", "amount": 3, "unit": "dal" },
+        { "name": "Pul biber", "amount": 1, "unit": "çay kaşığı" }
+      ],
+      "steps": [
+        "Bulguru sıcak suyla ıslatıp üzerini kapatın, 15 dk demlendirin.",
+        "Salçaları ve zeytinyağını ekleyip elle yoğurun.",
+        "Limon suyu ve nar ekşisini ekleyin.",
+        "İnce doğranmış maydanoz, taze soğan ve pul biberi katın.",
+        "Tuzunu ayarlayıp servis edin; marul yapraklarıyla sarılarak yenir."
+      ],
+      "nutrition": { "calories": 290, "proteinG": 7, "carbsG": 45, "fatG": 10 }
+    }
+  ]
+}

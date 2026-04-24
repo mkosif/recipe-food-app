@@ -1,4 +1,4 @@
-import Recipe from '../model/Recipe'
+import { RecipeSummary } from '../model/Recipe'
 import FavoriteTable from '../service/FavoriteTable'
 import { common } from '@kit.AbilityKit'
 
@@ -12,11 +12,11 @@ export class RecipesDetailViewModel {
     })
   }
 
-  getBookmarks(callback: (recipes: Recipe[]) => void): void {
+  getBookmarks(callback: (recipes: RecipeSummary[]) => void): void {
     this.favoriteTable.getAll(callback)
   }
 
-  addBookmark(recipe: Recipe, callback: (success: boolean) => void): void {
+  addBookmark(recipe: RecipeSummary, callback: (success: boolean) => void): void {
     this.favoriteTable.insertFavorite(recipe, callback)
   }
 
@@ -25,10 +25,7 @@ export class RecipesDetailViewModel {
   }
 
   isBookmarked(id: string, callback: (exists: boolean) => void): void {
-    this.favoriteTable.getAll((recipes: Recipe[]) => {
-      const found = recipes.some(r => r.id === id)
-      callback(found)
-    })
+    this.favoriteTable.isBookmarked(id, callback)
   }
 
   getBookmarkCount(callback: (count: number) => void): void {

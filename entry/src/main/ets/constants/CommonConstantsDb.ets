@@ -16,12 +16,11 @@ export default class CommonConstantsDb {
     tableName: 'favoriteTable',
     sqlCreate: `CREATE TABLE IF NOT EXISTS favoriteTable (
       id TEXT PRIMARY KEY,
-      name TEXT,
+      name TEXT NOT NULL,
       imageSource TEXT,
-      description TEXT,
-      isFavorite INTEGER
+      description TEXT
     )`,
-    columns: ['id', 'name', 'imageSource', 'description', 'isFavorite']
+    columns: ['id', 'name', 'imageSource', 'description']
   };
 
 

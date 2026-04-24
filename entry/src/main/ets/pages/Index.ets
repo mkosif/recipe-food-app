@@ -19,8 +19,8 @@ struct Index {
                 .height(24)
                 .margin({ right: 8 })
 
-              Text('Recipes')
-                .fontColor('#ff000000')
+              Text($r('app.string.nav_recipes'))
+                .fontColor($r('app.color.text_on_surface'))
                 .fontWeight(900)
                 .fontSize(25)
                 .fontStyle(FontStyle.Italic)
@@ -29,7 +29,7 @@ struct Index {
           .type(ButtonType.Normal)
           .borderRadius(5)
           .padding(10)
-          .backgroundColor('#ffffffff')
+          .backgroundColor($r('app.color.surface_primary'))
           .onClick(() => {
             this.navPathStack.pushPath({ name: 'RecipesPage' });
           })
@@ -43,8 +43,8 @@ struct Index {
                 .height(24)
                 .margin({ right: 8 })
 
-              Text('Bookmarks')
-                .fontColor('#ff000000')
+              Text($r('app.string.nav_bookmarks'))
+                .fontColor($r('app.color.text_on_surface'))
                 .fontWeight(900)
                 .fontSize(25)
                 .fontStyle(FontStyle.Italic)
@@ -53,7 +53,7 @@ struct Index {
           .type(ButtonType.Normal)
           .borderRadius(5)
           .padding(10)
-          .backgroundColor('#ffffffff')
+          .backgroundColor($r('app.color.surface_primary'))
           .onClick(() => {
             this.navPathStack.pushPath({ name: 'FavoritePage' });
           })
@@ -61,7 +61,7 @@ struct Index {
         .alignItems(HorizontalAlign.Center)
         .width('100%')
       }
-      .backgroundColor(Color.Black)
+      .backgroundColor($r('app.color.background_primary'))
       .height('100%')
       .width('100%')
     }

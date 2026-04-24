@@ -35,34 +35,51 @@ export default class Rdb {
     });
   }
 
-  getRdbStore(callback: Function = () => {}) {
-    if (!callback || typeof callback === 'undefined' || callback === undefined) {
-      Logger.info(CommonConstants.RDB_TAG, 'getRdbStore() has no callback!');
-      return;
-    }
+  getRdbStore(callback: (err?: Error) => void = () => {}) {
     if (this.rdbStore !== null) {
-      Logger.info(CommonConstants.RDB_TAG, 'The rdbStore exists.');
       callback();
       return;
     }
 
     relationalStore.getRdbStore(this.context, CommonConstants.STORE_CONFIG, (err, rdb) => {
       if (err) {
-        Logger.error(CommonConstants.RDB_TAG, `gerRdbStore() failed, err: ${err.code}`);
+        Logger.error(CommonConstants.RDB_TAG, `getRdbStore() failed, err: ${err.code}`);
+        callback(err);
         return;
       }
       this.rdbStore = rdb;
       this.rdbStore.executeSql(this.sqlCreateTable);
-      Logger.info(CommonConstants.RDB_TAG, 'getRdbStore() finished.');
       callback();
     });
   }
 
-  insertData(data: relationalStore.ValuesBucket, callback: (success: boolean) => void = () => {}): void {
-    if (!this.rdbStore) {return;}
-    this.rdbStore.insert(this.tableName, data, (err, result) => {
+  insertData(
+    data: relationalStore.ValuesBucket,
+    callback: (success: boolean) => void = () => {},
+    conflictResolution: relationalStore.ConflictResolution = relationalStore.ConflictResolution.ON_CONFLICT_NONE
+  ): void {
+    if (!this.rdbStore) {
+      callback(false);
+      return;
+    }
+    this.rdbStore.insert(this.tableName, data, conflictResolution, (err, result) => {
       if (err) {
-        console.error('[RDB] Insert Error:', err);
+        Logger.error(CommonConstants.RDB_TAG, `insertData() failed, err: ${err}`);
+        callback(false);
+        return;
+      }
+      callback(result !== -1);
+    });
+  }
+
+  deleteData(predicates: relationalStore.RdbPredicates, callback: (success: boolean) => void = () => {}) {
+    if (!this.rdbStore) {
+      callback(false);
+      return;
+    }
+    this.rdbStore.delete(predicates, (err, ret) => {
+      if (err) {
+        Logger.error(CommonConstants.RDB_TAG, `deleteData() failed, err: ${err}`);
         callback(false);
         return;
       }
@@ -70,60 +87,38 @@ export default class Rdb {
     });
   }
 
-  deleteData(predicates: relationalStore.RdbPredicates, callback: Function = () => {}) {
-    if (!callback || typeof callback === 'undefined' || callback === undefined) {
-      Logger.info(CommonConstants.RDB_TAG, 'deleteData() has no callback!');
+  updateData(
+    predicate: relationalStore.RdbPredicates,
+    data: relationalStore.ValuesBucket,
+    callback: (success: boolean) => void = () => {}
+  ) {
+    if (!this.rdbStore) {
+      callback(false);
       return;
     }
-    const resFlag: boolean = false;
-    if (this.rdbStore) {
-      this.rdbStore.delete(predicates, (err, ret) => {
-        if (err) {
-          Logger.error(CommonConstants.RDB_TAG, `deleteData() failed, err: ${err}`);
-          callback(resFlag);
-          return;
-        }
-        Logger.info(CommonConstants.RDB_TAG, `deleteData() finished: ${ret}`);
-        callback(!resFlag);
-      });
-    }
-  }
-  
-  updateData(predicate: relationalStore.RdbPredicates, data: relationalStore.ValuesBucket, call: Function = () => {}) {
-    if (!call || typeof call === 'undefined' || call === undefined) {
-      Logger.info(CommonConstants.RDB_TAG, 'updateDate() has no callback!');
-      return;
-    }
-    const resFlag: boolean = false;
-    const valueBucket: relationalStore.ValuesBucket = data;
-    if (this.rdbStore) {
-      this.rdbStore.update(valueBucket, predicate, (err, ret) => {
-        if (err) {
-          Logger.error(CommonConstants.RDB_TAG, `updateData() failed, err: ${err}`);
-          call(resFlag);
-          return;
-        }
-        Logger.info(CommonConstants.RDB_TAG, `updateData() finished: ${ret}`);
-        call(!resFlag);
-      });
-    }
+    this.rdbStore.update(data, predicate, (err, ret) => {
+      if (err) {
+        Logger.error(CommonConstants.RDB_TAG, `updateData() failed, err: ${err}`);
+        callback(false);
+        return;
+      }
+      callback(true);
+    });
   }
 
-  query(predicates: relationalStore.RdbPredicates, callback: Function = () => {}) {
-    if (!callback || typeof callback === 'undefined' || callback === undefined) {
-      Logger.info(CommonConstants.RDB_TAG, 'query() has no callback!');
+  query(predicates: relationalStore.RdbPredicates, callback: (resultSet: relationalStore.ResultSet | null) => void = () => {}) {
+    if (!this.rdbStore) {
+      callback(null);
       return;
     }
-    if (this.rdbStore) {
-      this.rdbStore.query(predicates, this.columns, (err, resultSet) => {
-        if (err) {
-          Logger.error(CommonConstants.RDB_TAG, `query() failed, err:  ${err}`);
-          return;
-        }
-        Logger.info(CommonConstants.RDB_TAG, 'query() finished.');
-        callback(resultSet);
-        resultSet.close();
-      });
-    }
+    this.rdbStore.query(predicates, this.columns, (err, resultSet) => {
+      if (err) {
+        Logger.error(CommonConstants.RDB_TAG, `query() failed, err: ${err}`);
+        callback(null);
+        return;
+      }
+      callback(resultSet);
+      resultSet.close();
+    });
   }
 }

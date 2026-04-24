@@ -3,6 +3,42 @@
     {
       "name": "start_window_background",
       "value": "#FFFFFF"
+    },
+    {
+      "name": "background_primary",
+      "value": "#000000"
+    },
+    {
+      "name": "surface_primary",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "text_primary",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "text_on_surface",
+      "value": "#000000"
+    },
+    {
+      "name": "text_secondary",
+      "value": "#BBBBBB"
+    },
+    {
+      "name": "shimmer_base",
+      "value": "#333333"
+    },
+    {
+      "name": "shimmer_highlight",
+      "value": "#444444"
+    },
+    {
+      "name": "shimmer_button",
+      "value": "#555555"
+    },
+    {
+      "name": "divider",
+      "value": "#FFFFFF"
     }
   ]
 }

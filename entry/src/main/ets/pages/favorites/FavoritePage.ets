@@ -1,7 +1,7 @@
-import Recipe from '../../model/Recipe';
+import Recipe, { RecipeSummary } from '../../model/Recipe';
 import RecipeCard from '../../component/RecipeCard';
 import { RecipesDetailViewModel } from '../../viewmodel/RecipesDetailViewModel';
-import FavoriteTable from '../../service/FavoriteTable';
+import RecipeRepository from '../../service/RecipeRepository';
 import { common } from '@kit.AbilityKit';
 
 @Component
@@ -9,31 +9,35 @@ export struct FavoritePageDestination {
   private viewModel: RecipesDetailViewModel | null = null;
   @State private bookmarks: Recipe[] = [];
   @State private isLoading: boolean = true;
-  private favoriteTable: FavoriteTable | null = null;
-  private navPathStack: NavPathStack = new NavPathStack();
+  @Provide('navPathStack') navPathStack: NavPathStack = new NavPathStack();
   @StorageLink('context') context: common.UIAbilityContext | null = null;
 
   aboutToAppear(): void {
     if (!this.context) {
-      console.error('Context is not available');
       return;
     }
-
-    this.favoriteTable = new FavoriteTable(this.context);
     this.viewModel = new RecipesDetailViewModel(this.context);
+    this.loadBookmarks();
+  }
 
-    this.favoriteTable.getCount((count: number) => {
-      console.info('Bookmark count:', count);
-    });
-
-    this.viewModel.getBookmarkCount((count: number) => {
-      console.info('Bookmark count:', count);
-    });
-
-    this.viewModel.getBookmarks((result: Recipe[]) => {
-      this.bookmarks = result;
+  private loadBookmarks(): void {
+    if (!this.viewModel || !this.context) {
+      return;
+    }
+    const ctx = this.context;
+    this.isLoading = true;
+    this.viewModel.getBookmarks(async (stubs: RecipeSummary[]) => {
+      const repo = RecipeRepository.getInstance();
+      const resolved: Recipe[] = [];
+      for (const stub of stubs) {
+        const full = await repo.findById(ctx, stub.id);
+        if (full) {
+          full.isFavorite = true;
+          resolved.push(full);
+        }
+      }
+      this.bookmarks = resolved;
       this.isLoading = false;
-      console.info('Bookmarks loaded:', result.length);
     });
   }
 
@@ -43,23 +47,27 @@ export struct FavoritePageDestination {
         Row() {
           Text('←')
             .fontSize(24)
-            .fontColor(Color.White)
+            .fontColor($r('app.color.text_primary'))
             .margin({ right: 8 })
             .onClick(() => {
               this.navPathStack.pop();
             })
-          Text('Favorites')
+          Text($r('app.string.nav_favorites'))
             .fontSize(20)
             .fontWeight(900)
-            .fontColor(Color.White)
+            .fontColor($r('app.color.text_primary'))
         }
         .width('100%')
         .padding(12)
 
         if (this.isLoading) {
-          Text('Loading bookmarks...').fontColor(Color.Gray).fontSize(16)
+          Text($r('app.string.msg_loading_bookmarks'))
+            .fontColor($r('app.color.text_secondary'))
+            .fontSize(16)
         } else if (this.bookmarks.length === 0) {
-          Text('No bookmarks yet.').fontColor(Color.White).fontSize(16)
+          Text($r('app.string.msg_no_bookmarks'))
+            .fontColor($r('app.color.text_primary'))
+            .fontSize(16)
         } else {
           Scroll() {
             Column() {
@@ -72,7 +80,7 @@ export struct FavoritePageDestination {
           .height('85%')
         }
       }
-      .backgroundColor(Color.Black)
+      .backgroundColor($r('app.color.background_primary'))
       .width('100%')
       .height('100%')
       .alignItems(HorizontalAlign.Center)
@@ -83,17 +91,7 @@ export struct FavoritePageDestination {
       this.navPathStack = context.pathStack;
     })
     .onShown(() => {
-      if (this.viewModel) {
-        this.isLoading = true;
-        this.viewModel.getBookmarkCount((count: number) => {
-          console.info('Bookmark count (show):', count);
-        });
-        this.viewModel.getBookmarks((result: Recipe[]) => {
-          this.bookmarks = result;
-          this.isLoading = false;
-          console.info('Bookmarks loaded (show):', result.length);
-        });
-      }
+      this.loadBookmarks();
     })
   }
 }

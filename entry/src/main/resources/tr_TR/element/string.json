@@ -1,56 +1,52 @@
 {
   "string": [
     {
-      "name": "module_desc",
-      "value": "module description"
-    },
-    {
       "name": "EntryAbility_desc",
-      "value": "Food Recipe app"
+      "value": "Yemek Tarifi uygulaması"
     },
     {
       "name": "EntryAbility_label",
-      "value": "Food Recipe"
+      "value": "Yemek Tarifi"
     },
     {
       "name": "nav_recipes",
-      "value": "Recipes"
+      "value": "Tarifler"
     },
     {
       "name": "nav_bookmarks",
-      "value": "Bookmarks"
+      "value": "Favoriler"
     },
     {
       "name": "nav_favorites",
-      "value": "Favorites"
+      "value": "Favoriler"
     },
     {
       "name": "nav_detail",
-      "value": "Detail"
+      "value": "Detay"
     },
     {
       "name": "label_description",
-      "value": "Description"
+      "value": "Açıklama"
     },
     {
       "name": "label_ingredients",
-      "value": "Ingredients"
+      "value": "Malzemeler"
     },
     {
       "name": "label_steps",
-      "value": "Steps"
+      "value": "Adımlar"
     },
     {
       "name": "label_nutrition",
-      "value": "Nutrition (per serving)"
+      "value": "Besin Değerleri (porsiyon başına)"
     },
     {
       "name": "label_servings",
-      "value": "servings"
+      "value": "porsiyon"
     },
     {
       "name": "label_minutes",
-      "value": "min"
+      "value": "dk"
     },
     {
       "name": "label_kcal",
@@ -58,67 +54,67 @@
     },
     {
       "name": "btn_add_bookmark",
-      "value": "Add Bookmark"
+      "value": "Favorilere Ekle"
     },
     {
       "name": "btn_remove_bookmark",
-      "value": "Remove Bookmark"
+      "value": "Favorilerden Çıkar"
     },
     {
       "name": "msg_loading_bookmarks",
-      "value": "Loading bookmarks..."
+      "value": "Favoriler yükleniyor..."
     },
     {
       "name": "msg_no_bookmarks",
-      "value": "No bookmarks yet."
+      "value": "Henüz favori yok."
     },
     {
       "name": "msg_loading",
-      "value": "Loading..."
+      "value": "Yükleniyor..."
     },
     {
       "name": "difficulty_easy",
-      "value": "Easy"
+      "value": "Kolay"
     },
     {
       "name": "difficulty_medium",
-      "value": "Medium"
+      "value": "Orta"
     },
     {
       "name": "difficulty_hard",
-      "value": "Hard"
+      "value": "Zor"
     },
     {
       "name": "category_all",
-      "value": "All"
+      "value": "Tümü"
     },
     {
       "name": "category_soup",
-      "value": "Soups"
+      "value": "Çorbalar"
     },
     {
       "name": "category_main",
-      "value": "Main"
+      "value": "Ana Yemekler"
     },
     {
       "name": "category_dessert",
-      "value": "Desserts"
+      "value": "Tatlılar"
     },
     {
       "name": "category_pastry",
-      "value": "Pastry"
+      "value": "Hamur İşleri"
     },
     {
       "name": "category_breakfast",
-      "value": "Breakfast"
+      "value": "Kahvaltılıklar"
     },
     {
       "name": "category_salad",
-      "value": "Salads"
+      "value": "Salatalar"
     },
     {
       "name": "category_drink",
-      "value": "Drinks"
+      "value": "İçecekler"
     }
   ]
 }
