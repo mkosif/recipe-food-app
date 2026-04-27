@@ -35,3 +35,7 @@ export function difficultyLabel(difficulty: Difficulty): Resource {
 export function sortedCategories(present: Set<RecipeCategory>): RecipeCategory[] {
   return CATEGORY_ORDER.filter(c => present.has(c));
 }
+
+export function allCategories(): RecipeCategory[] {
+  return CATEGORY_ORDER.slice();
+}

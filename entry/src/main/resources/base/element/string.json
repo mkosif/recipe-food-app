@@ -119,6 +119,26 @@
     {
       "name": "category_drink",
       "value": "Drinks"
+    },
+    {
+      "name": "btn_start_cooking",
+      "value": "Start Cooking"
+    },
+    {
+      "name": "nav_cook_mode",
+      "value": "Cook Mode"
+    },
+    {
+      "name": "hint_search",
+      "value": "Search recipes or ingredients"
+    },
+    {
+      "name": "msg_no_results",
+      "value": "No recipes match your search."
+    },
+    {
+      "name": "btn_clear",
+      "value": "Clear"
     }
   ]
 }

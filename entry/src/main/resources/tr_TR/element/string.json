@@ -115,6 +115,26 @@
     {
       "name": "category_drink",
       "value": "İçecekler"
+    },
+    {
+      "name": "btn_start_cooking",
+      "value": "Pişirmeye Başla"
+    },
+    {
+      "name": "nav_cook_mode",
+      "value": "Pişirme Modu"
+    },
+    {
+      "name": "hint_search",
+      "value": "Tarif veya malzeme ara"
+    },
+    {
+      "name": "msg_no_results",
+      "value": "Aramanızla eşleşen tarif yok."
+    },
+    {
+      "name": "btn_clear",
+      "value": "Temizle"
     }
   ]
 }

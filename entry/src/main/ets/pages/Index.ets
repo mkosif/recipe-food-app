@@ -1,4 +1,5 @@
 import Recipe from '../model/Recipe';
+import { CookModePageDestination } from './cook/CookModePage';
 import { DetailPageDestination } from './DetailPage';
 import { FavoritePageDestination } from './favorites/FavoritePage';
 import { RecipesPageDestination } from './recipes/RecipesPage';
@@ -79,6 +80,8 @@ struct Index {
       FavoritePageDestination();
     } else if (name === 'DetailPage') {
       DetailPageDestination({ recipe: param as Recipe });
+    } else if (name === 'CookModePage') {
+      CookModePageDestination({ recipe: param as Recipe });
     }
   }
 }

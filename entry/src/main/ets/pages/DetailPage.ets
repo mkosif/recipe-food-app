@@ -108,11 +108,22 @@ export struct DetailPageDestination {
 
       this.buildMeta()
 
-      Button(this.buttonText)
-        .backgroundColor($r('app.color.surface_primary'))
-        .fontColor($r('app.color.text_on_surface'))
-        .fontSize(13)
-        .onClick(() => this.toggleBookmark())
+      Row({ space: 8 }) {
+        Button($r('app.string.btn_start_cooking'))
+          .backgroundColor($r('app.color.surface_primary'))
+          .fontColor($r('app.color.text_on_surface'))
+          .fontSize(13)
+          .layoutWeight(1)
+          .enabled(this.currentRecipe.steps.length > 0)
+          .onClick(() => this.navPathStack.pushPathByName('CookModePage', this.currentRecipe))
+        Button(this.buttonText)
+          .backgroundColor(Color.Transparent)
+          .fontColor($r('app.color.text_primary'))
+          .border({ width: 1, color: $r('app.color.text_secondary'), radius: 14 })
+          .fontSize(12)
+          .onClick(() => this.toggleBookmark())
+      }
+      .width('90%')
 
       this.buildSection($r('app.string.label_description'), this.currentRecipe.description);
 
