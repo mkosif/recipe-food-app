@@ -38,20 +38,21 @@ export default class TimerService {
       ]
     };
 
+    let reminderId = -1;
     try {
-      const reminderId = await reminderAgentManager.publishReminder(reminder);
-      const timer: ActiveTimer = {
-        reminderId,
-        label,
-        durationSec,
-        startedAtMs: Date.now()
-      };
-      this.active.set(key, timer);
-      return true;
+      reminderId = await reminderAgentManager.publishReminder(reminder);
+      console.info(`[TimerService] publishReminder success: ${reminderId}`);
     } catch (err) {
       console.error('[TimerService] publishReminder failed:', JSON.stringify(err));
-      return false;
     }
+    const timer: ActiveTimer = {
+      reminderId,
+      label,
+      durationSec,
+      startedAtMs: Date.now()
+    };
+    this.active.set(key, timer);
+    return true;
   }
 
   async cancelTimer(key: string): Promise<void> {
@@ -59,10 +60,12 @@ export default class TimerService {
     if (!timer) {
       return;
     }
-    try {
-      await reminderAgentManager.cancelReminder(timer.reminderId);
-    } catch (err) {
-      console.error('[TimerService] cancelReminder failed:', JSON.stringify(err));
+    if (timer.reminderId >= 0) {
+      try {
+        await reminderAgentManager.cancelReminder(timer.reminderId);
+      } catch (err) {
+        console.error('[TimerService] cancelReminder failed:', JSON.stringify(err));
+      }
     }
     this.active.delete(key);
   }

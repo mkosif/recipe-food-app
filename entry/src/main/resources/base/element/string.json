@@ -130,15 +130,11 @@
     },
     {
       "name": "hint_search",
-      "value": "Search recipes or ingredients"
+      "value": "Search…"
     },
     {
       "name": "msg_no_results",
-      "value": "No recipes match your search."
-    },
-    {
-      "name": "btn_clear",
-      "value": "Clear"
+      "value": "No matches"
     }
   ]
 }

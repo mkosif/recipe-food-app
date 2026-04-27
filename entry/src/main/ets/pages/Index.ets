@@ -3,6 +3,7 @@ import { CookModePageDestination } from './cook/CookModePage';
 import { DetailPageDestination } from './DetailPage';
 import { FavoritePageDestination } from './favorites/FavoritePage';
 import { RecipesPageDestination } from './recipes/RecipesPage';
+import { SearchPageDestination } from './search/SearchPage';
 
 @Entry
 @Component
@@ -11,58 +12,60 @@ struct Index {
 
   build() {
     Navigation(this.navPathStack) {
-      Row() {
-        Column() {
-          Button() {
-            Row() {
-              Image($r('app.media.recipe'))
-                .width(24)
-                .height(24)
-                .margin({ right: 8 })
-
-              Text($r('app.string.nav_recipes'))
-                .fontColor($r('app.color.text_on_surface'))
-                .fontWeight(900)
-                .fontSize(25)
-                .fontStyle(FontStyle.Italic)
-            }
+      Column({ space: 10 }) {
+        Text('🍽')
+          .fontSize(26)
+          .fontColor($r('app.color.accent_primary'))
+        Text('Food Recipe')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('app.color.text_primary'))
+          .margin({ bottom: 4 })
+        Button() {
+          Row({ space: 8 }) {
+            Text('◆')
+              .fontSize(15)
+              .fontColor($r('app.color.accent_primary'))
+            Text($r('app.string.nav_recipes'))
+              .fontColor($r('app.color.text_on_surface'))
+              .fontWeight(FontWeight.Bold)
+              .fontSize(13)
           }
-          .type(ButtonType.Normal)
-          .borderRadius(5)
-          .padding(10)
-          .backgroundColor($r('app.color.surface_primary'))
-          .onClick(() => {
-            this.navPathStack.pushPath({ name: 'RecipesPage' });
-          })
-
-          Blank().height('5%')
-
-          Button() {
-            Row() {
-              Image($r('app.media.bookmarks'))
-                .width(24)
-                .height(24)
-                .margin({ right: 8 })
-
-              Text($r('app.string.nav_bookmarks'))
-                .fontColor($r('app.color.text_on_surface'))
-                .fontWeight(900)
-                .fontSize(25)
-                .fontStyle(FontStyle.Italic)
-            }
-          }
-          .type(ButtonType.Normal)
-          .borderRadius(5)
-          .padding(10)
-          .backgroundColor($r('app.color.surface_primary'))
-          .onClick(() => {
-            this.navPathStack.pushPath({ name: 'FavoritePage' });
-          })
+          .justifyContent(FlexAlign.Center)
+          .width('100%')
         }
-        .alignItems(HorizontalAlign.Center)
-        .width('100%')
+        .type(ButtonType.Normal)
+        .borderRadius(20)
+        .height(42)
+        .width('74%')
+        .backgroundColor($r('app.color.surface_primary'))
+        .border({ width: 1, color: $r('app.color.divider'), radius: 20 })
+        .onClick(() => this.navPathStack.pushPath({ name: 'RecipesPage' }))
+
+        Button() {
+          Row({ space: 8 }) {
+            Text('☆')
+              .fontSize(17)
+              .fontColor($r('app.color.accent_primary'))
+            Text($r('app.string.nav_bookmarks'))
+              .fontColor($r('app.color.text_on_surface'))
+              .fontWeight(FontWeight.Bold)
+              .fontSize(13)
+          }
+          .justifyContent(FlexAlign.Center)
+          .width('100%')
+        }
+        .type(ButtonType.Normal)
+        .borderRadius(20)
+        .height(42)
+        .width('74%')
+        .backgroundColor($r('app.color.surface_primary'))
+        .border({ width: 1, color: $r('app.color.divider'), radius: 20 })
+        .onClick(() => this.navPathStack.pushPath({ name: 'FavoritePage' }))
       }
       .backgroundColor($r('app.color.background_primary'))
+      .justifyContent(FlexAlign.Center)
+      .alignItems(HorizontalAlign.Center)
       .height('100%')
       .width('100%')
     }
@@ -82,6 +85,8 @@ struct Index {
       DetailPageDestination({ recipe: param as Recipe });
     } else if (name === 'CookModePage') {
       CookModePageDestination({ recipe: param as Recipe });
+    } else if (name === 'SearchPage') {
+      SearchPageDestination();
     }
   }
 }

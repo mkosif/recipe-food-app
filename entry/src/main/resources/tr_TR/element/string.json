@@ -126,15 +126,11 @@
     },
     {
       "name": "hint_search",
-      "value": "Tarif veya malzeme ara"
+      "value": "Ara…"
     },
     {
       "name": "msg_no_results",
-      "value": "Aramanızla eşleşen tarif yok."
-    },
-    {
-      "name": "btn_clear",
-      "value": "Temizle"
+      "value": "Sonuç yok"
     }
   ]
 }

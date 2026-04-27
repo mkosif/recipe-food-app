@@ -23,7 +23,6 @@ export default class CommonConstantsDb {
     columns: ['id', 'name', 'imageSource', 'description']
   };
 
-
   static readonly RDB_TAG = '[Debug.Rdb]';
   static readonly TABLE_TAG = '[Debug.AccountTable]';
   static readonly INDEX_TAG = '[Debug.Index]';

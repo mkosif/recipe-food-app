@@ -10,7 +10,23 @@
     },
     {
       "name": "surface_primary",
-      "value": "#1C1C1E"
+      "value": "#17251D"
+    },
+    {
+      "name": "surface_secondary",
+      "value": "#0F1712"
+    },
+    {
+      "name": "surface_elevated",
+      "value": "#152019"
+    },
+    {
+      "name": "accent_primary",
+      "value": "#8FD56B"
+    },
+    {
+      "name": "accent_on_primary",
+      "value": "#071008"
     },
     {
       "name": "text_primary",
@@ -38,7 +54,7 @@
     },
     {
       "name": "divider",
-      "value": "#FFFFFF"
+      "value": "#284232"
     }
   ]
 }

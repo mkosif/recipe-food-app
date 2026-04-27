@@ -1,8 +1,8 @@
 import Recipe, { RecipeSummary } from '../../model/Recipe';
-import RecipeCard from '../../component/RecipeCard';
 import { RecipesDetailViewModel } from '../../viewmodel/RecipesDetailViewModel';
 import RecipeRepository from '../../service/RecipeRepository';
 import { common } from '@kit.AbilityKit';
+import { RecipeListRow } from '../../component/RecipeListRow';
 
 @Component
 export struct FavoritePageDestination {
@@ -46,38 +46,44 @@ export struct FavoritePageDestination {
       Column() {
         Row() {
           Text('←')
-            .fontSize(24)
+            .fontSize(22)
             .fontColor($r('app.color.text_primary'))
-            .margin({ right: 8 })
-            .onClick(() => {
-              this.navPathStack.pop();
-            })
+            .onClick(() => this.navPathStack.pop())
           Text($r('app.string.nav_favorites'))
-            .fontSize(20)
+            .fontSize(17)
             .fontWeight(900)
             .fontColor($r('app.color.text_primary'))
+            .layoutWeight(1)
+            .margin({ left: 6 })
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
         }
-        .width('100%')
-        .padding(12)
+        .width('92%')
+        .padding({ top: 8, bottom: 4 })
 
         if (this.isLoading) {
           Text($r('app.string.msg_loading_bookmarks'))
             .fontColor($r('app.color.text_secondary'))
-            .fontSize(16)
+            .fontSize(12)
+            .margin(16)
         } else if (this.bookmarks.length === 0) {
           Text($r('app.string.msg_no_bookmarks'))
             .fontColor($r('app.color.text_primary'))
-            .fontSize(16)
+            .fontSize(13)
+            .margin(16)
         } else {
-          Scroll() {
-            Column() {
-              ForEach(this.bookmarks, (recipe: Recipe) => {
-                RecipeCard({ recipe });
-              }, (recipe: Recipe) => recipe.id)
-            }
+          List({ space: 6 }) {
+            ForEach(this.bookmarks, (recipe: Recipe) => {
+              ListItem() {
+                RecipeListRow({ recipe: recipe });
+              }
+              .onClick(() => this.navPathStack.pushPathByName('DetailPage', recipe))
+            }, (recipe: Recipe) => recipe.id)
           }
-          .scrollable(ScrollDirection.Vertical)
-          .height('85%')
+          .width('100%')
+          .layoutWeight(1)
+          .alignListItem(ListItemAlign.Center)
+          .scrollBar(BarState.Off)
         }
       }
       .backgroundColor($r('app.color.background_primary'))
@@ -94,4 +100,5 @@ export struct FavoritePageDestination {
       this.loadBookmarks();
     })
   }
+
 }
