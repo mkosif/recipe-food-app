@@ -106,7 +106,10 @@ export default class Rdb {
     });
   }
 
-  query(predicates: relationalStore.RdbPredicates, callback: (resultSet: relationalStore.ResultSet | null) => void = () => {}) {
+  query(
+    predicates: relationalStore.RdbPredicates,
+    callback: (resultSet: relationalStore.ResultSet | null) => void = () => {}
+  ) {
     if (!this.rdbStore) {
       callback(null);
       return;
