@@ -66,6 +66,10 @@ export struct DetailPageDestination {
     }
   }
 
+  private getStepOrder(step: string): number {
+    return this.currentRecipe.steps.indexOf(step) + 1;
+  }
+
   build() {
     NavDestination() {
       Column() {
@@ -313,9 +317,9 @@ export struct DetailPageDestination {
         .fontSize(12)
         .fontWeight(FontWeight.Bold)
         .fontColor($r('app.color.accent_primary'))
-      ForEach(this.currentRecipe.steps, (step: string, idx: number) => {
+      ForEach(this.currentRecipe.steps, (step: string) => {
         Row() {
-          Text(`${idx + 1}. `)
+          Text(`${this.getStepOrder(step)}. `)
             .fontSize(12)
             .fontWeight(FontWeight.Bold)
             .fontColor($r('app.color.accent_primary'))

@@ -1,5 +1,3 @@
-> **Note:** To access all shared projects, get information about environment setup, and view other guides, please visit [Explore-In-HMOS-Wearable Index](https://github.com/Explore-In-HMOS-Wearable/hmos-index).
-
 # Food Recipe
 
 This recipe-food-app is a lightweight and intuitive recipe manager designed for HarmonyOS wearable devices using **ArkTS/ArkUI** for HarmonyOS. Users can explore delicious recipes, add them to favorites (bookmarks), and manage them locally using **RDB (Relational Database)**
